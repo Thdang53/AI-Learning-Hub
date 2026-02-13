@@ -5,7 +5,7 @@ import AIChat from '../components/Sidebar/AIChat';
 import Output from '../components/Terminal/Output';
 import AIFeedback from '../components/Terminal/AIFeedback';
 import { getAIAnalysis } from '../services/aiService'; 
-import { Play, CheckCircle, ChevronLeft, ChevronRight, BookOpen, MessageSquare, LayoutTemplate, Terminal, Home } from 'lucide-react';
+import { Play, CheckCircle, BookOpen, MessageSquare, LayoutTemplate, Terminal } from 'lucide-react';
 
 const MainLayout = () => { 
   const [leftOpen, setLeftOpen] = useState(true);
@@ -29,31 +29,14 @@ const MainLayout = () => {
     }
   };
 
-  // Hàm quay về Dashboard (reload lại trang về root)
-  const goHome = () => {
-    window.location.href = "/";
-  };
-
   return (
-    <div className="flex flex-col h-screen w-full bg-[#0f172a] text-gray-300 overflow-hidden font-sans text-sm">
+    <div className="flex flex-col h-screen w-full bg-gray-950 text-gray-300 overflow-hidden font-sans text-sm">
       
-      {/* HEADER: Tông Tối Đồng Bộ */}
-      <header className="h-14 bg-[#1e293b] border-b border-gray-700 flex items-center justify-between px-4 shadow-md z-30 shrink-0">
+      {/* HEADER: Đã xóa nút Dashboard, đổi sang màu gray chuẩn */}
+      <header className="h-14 bg-gray-900 border-b border-gray-700 flex items-center justify-between px-4 shadow-md z-30 shrink-0">
+        
+        {/* Bên trái: Tên bài học */}
         <div className="flex items-center gap-4">
-          
-          {/* --- NÚT HOME MỚI (Thay thế nút quay lại cũ) --- */}
-          <button 
-            onClick={goHome}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg font-bold text-gray-200 bg-[#334155] border border-gray-600 hover:bg-[#475569] hover:text-white transition-all shadow-md active:scale-95"
-            title="Về trang chủ"
-          >
-            <Home size={18} />
-            <span className="hidden sm:block">Trang chủ</span>
-          </button>
-
-          {/* Đường gạch dọc ngăn cách */}
-          <div className="h-6 w-px bg-gray-600 mx-2"></div>
-
           <div>
             <h1 className="font-bold text-gray-100 text-sm flex items-center gap-2">
               Bài 1: Giới thiệu Javascript
@@ -62,6 +45,7 @@ const MainLayout = () => {
           </div>
         </div>
 
+        {/* Bên phải: Chỉ còn 2 nút quan trọng (Chạy Code & Nộp Bài) */}
         <div className="flex items-center gap-3">
            <button 
               onClick={handleRunCode}
@@ -74,29 +58,29 @@ const MainLayout = () => {
              {isRunning ? 'Đang chạy...' : 'Chạy Code'}
            </button>
            
-           <button className="flex items-center gap-2 px-5 py-2 rounded-lg font-bold text-gray-300 bg-[#334155] border border-gray-600 hover:bg-gray-600 hover:text-white transition-all shadow-lg active:scale-95">
+           <button className="flex items-center gap-2 px-5 py-2 rounded-lg font-bold text-gray-300 bg-gray-800 border border-gray-600 hover:bg-gray-700 hover:text-white transition-all shadow-lg active:scale-95">
              Nộp bài <CheckCircle size={16} className="text-green-500"/>
            </button>
         </div>
       </header>
 
       {/* WORKSPACE BODY */}
-      <div className="flex-1 flex overflow-hidden relative bg-[#0f172a]">
+      <div className="flex-1 flex overflow-hidden relative bg-gray-950">
         
-        {/* CỘT TRÁI: Nội dung (NỀN TỐI) */}
-        <div className={`${leftOpen ? 'w-[35%] min-w-[320px]' : 'w-0'} flex flex-col bg-[#111827] border-r border-gray-700 transition-all duration-300 relative z-20`}>
+        {/* CỘT TRÁI: Nội dung */}
+        <div className={`${leftOpen ? 'w-[35%] min-w-[320px]' : 'w-0'} flex flex-col bg-gray-900 border-r border-gray-700 transition-all duration-300 relative z-20`}>
           {leftOpen && (
             <>
-              {/* Tab Navigation Tối */}
-              <div className="flex p-2 gap-1 bg-[#1f293b] border-b border-gray-700">
-                <button onClick={() => setActiveTab('lesson')} className={`flex-1 py-2 rounded-md text-xs font-bold flex items-center justify-center gap-2 transition-all ${activeTab === 'lesson' ? 'bg-[#334155] text-blue-400 shadow-md border border-gray-600' : 'text-gray-500 hover:bg-gray-800 hover:text-gray-300'}`}>
+              {/* Tab Navigation */}
+              <div className="flex p-2 gap-1 bg-gray-900 border-b border-gray-700">
+                <button onClick={() => setActiveTab('lesson')} className={`flex-1 py-2 rounded-md text-xs font-bold flex items-center justify-center gap-2 transition-all ${activeTab === 'lesson' ? 'bg-gray-800 text-blue-400 shadow-md border border-gray-600' : 'text-gray-500 hover:bg-gray-800 hover:text-gray-300'}`}>
                   <BookOpen size={16} /> Bài học
                 </button>
-                <button onClick={() => setActiveTab('chat')} className={`flex-1 py-2 rounded-md text-xs font-bold flex items-center justify-center gap-2 transition-all ${activeTab === 'chat' ? 'bg-[#334155] text-purple-400 shadow-md border border-gray-600' : 'text-gray-500 hover:bg-gray-800 hover:text-gray-300'}`}>
+                <button onClick={() => setActiveTab('chat')} className={`flex-1 py-2 rounded-md text-xs font-bold flex items-center justify-center gap-2 transition-all ${activeTab === 'chat' ? 'bg-gray-800 text-purple-400 shadow-md border border-gray-600' : 'text-gray-500 hover:bg-gray-800 hover:text-gray-300'}`}>
                   <MessageSquare size={16} /> Trợ giảng AI
                 </button>
               </div>
-              <div className="flex-1 overflow-y-auto bg-[#111827] custom-scrollbar">
+              <div className="flex-1 overflow-y-auto bg-gray-900 custom-scrollbar">
                 {activeTab === 'lesson' ? <LessonContent /> : <AIChat />}
               </div>
             </>
@@ -119,13 +103,13 @@ const MainLayout = () => {
         </div>
 
         {/* CỘT PHẢI: TERMINAL */}
-        <div className={`${rightOpen ? 'w-[30%] min-w-[300px]' : 'w-0'} flex flex-col bg-[#0f172a] border-l border-gray-700 transition-all duration-300`}>
+        <div className={`${rightOpen ? 'w-[30%] min-w-[300px]' : 'w-0'} flex flex-col bg-gray-950 border-l border-gray-700 transition-all duration-300`}>
           
           {/* Console */}
           <div className="flex-1 flex flex-col border-b border-gray-700 overflow-hidden bg-black">
-             <div className="h-10 bg-[#1e293b] border-b border-gray-700 flex items-center px-3 justify-between">
+             <div className="h-10 bg-gray-900 border-b border-gray-700 flex items-center px-3 justify-between">
                 <span className="text-xs font-bold text-gray-400 flex items-center gap-2 uppercase tracking-wider"><Terminal size={14}/> Console Output</span>
-                <button onClick={() => setRightOpen(!rightOpen)} className="text-gray-500 hover:text-white"><ChevronRight size={16}/></button>
+                 <button onClick={() => setRightOpen(!rightOpen)} className="text-gray-500 hover:text-white p-1"><LayoutTemplate size={16}/></button>
              </div>
              <div className="flex-1 p-0">
                 <Output />
@@ -133,8 +117,8 @@ const MainLayout = () => {
           </div>
 
           {/* AI Feedback */}
-          <div className="flex-1 flex flex-col overflow-hidden bg-[#111827]">
-             <div className="h-10 bg-[#1e293b] border-b border-gray-700 flex items-center px-3 justify-between">
+          <div className="flex-1 flex flex-col overflow-hidden bg-gray-900">
+             <div className="h-10 bg-gray-900 border-b border-gray-700 flex items-center px-3 justify-between">
                 <span className="text-xs font-bold text-purple-400 flex items-center gap-2 uppercase tracking-wider">✨ AI Analysis</span>
              </div>
              <div className="flex-1 p-0 overflow-y-auto custom-scrollbar">
