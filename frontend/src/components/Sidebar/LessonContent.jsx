@@ -1,79 +1,71 @@
-// File: src/components/Sidebar/LessonContent.jsx
-import React, { useState } from 'react';
-import { BookOpen, CheckCircle, Lock, PlayCircle } from 'lucide-react';
+import React from 'react';
 
 const LessonContent = () => {
-  // Mock data: Danh sách bài học trong khóa
-  const lessons = [
-    { id: 1, title: 'Giới thiệu Javascript', status: 'completed' }, // Đã xong
-    { id: 2, title: 'Biến & Kiểu dữ liệu', status: 'active' },      // Đang học
-    { id: 3, title: 'Câu lệnh điều kiện (If-Else)', status: 'locked' },
-    { id: 4, title: 'Vòng lặp (Loops)', status: 'locked' },
-    { id: 5, title: 'Hàm (Functions)', status: 'locked' },
-  ];
-
   return (
-    <div className="flex flex-col h-full bg-gray-900 text-white">
-      {/* Tiêu đề khóa học */}
-      <div className="p-4 border-b border-gray-800 bg-gray-800/50">
-        <h2 className="text-lg font-bold flex items-center gap-2 text-blue-400">
-          <BookOpen size={20} />
-          Javascript Căn Bản
-        </h2>
-        <div className="mt-2 w-full bg-gray-700 h-1.5 rounded-full overflow-hidden">
-           <div className="bg-blue-500 h-full w-[20%]"></div> {/* Progress bar: 20% */}
-        </div>
-        <p className="text-xs text-gray-400 mt-1">Hoàn thành 1/5 bài học</p>
+    <div className="p-6 text-gray-300 font-sans">
+      <h1 className="text-2xl font-bold text-white mb-2">Biến và Kiểu dữ liệu</h1>
+      <div className="flex items-center gap-2 mb-6">
+         <span className="bg-blue-900/30 text-blue-400 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider border border-blue-800">Javascript Basic</span>
+         <span className="text-xs text-gray-500 font-medium">Đọc trong 5 phút</span>
       </div>
+      
+      {/* Sử dụng prose-invert để tự động chuyển văn bản sang màu sáng */}
+      <div className="prose prose-invert prose-sm max-w-none leading-relaxed text-gray-400">
+        <p className="mb-4">
+          Chào mừng bạn đến với bài học đầu tiên! Hôm nay chúng ta sẽ tìm hiểu cách lưu trữ thông tin trong máy tính thông qua khái niệm cơ bản nhất: <strong className="text-white">Biến (Variable)</strong>.
+        </p>
 
-      {/* Nội dung bài học hiện tại */}
-      <div className="flex-1 overflow-y-auto p-5 custom-scrollbar">
-        <h3 className="text-xl font-bold text-white mb-3">Bài 2: Biến & Kiểu dữ liệu</h3>
-        
-        <div className="prose prose-invert prose-sm max-w-none text-gray-300">
-          <p>
-            Trong bài này, chúng ta sẽ học cách lưu trữ thông tin bằng <strong>Biến (Variables)</strong>.
+        {/* Khối định nghĩa - Style Tối */}
+        <div className="bg-[#1e293b] border-l-4 border-blue-500 p-4 rounded-r mb-6 shadow-sm">
+          <h4 className="font-bold text-blue-400 text-xs uppercase mb-1">💡 Định nghĩa</h4>
+          <p className="text-gray-300 text-sm m-0">
+            Biến giống như một chiếc hộp có dán nhãn, dùng để chứa dữ liệu. Bạn có thể thay đổi vật trong hộp, nhưng nhãn (tên biến) thì giữ nguyên.
           </p>
-          
-          <h4 className="text-white font-semibold mt-4">1. Khai báo biến</h4>
-          <p>Sử dụng từ khóa <code>let</code> hoặc <code>const</code>:</p>
-          <div className="bg-gray-800 p-3 rounded border-l-2 border-blue-500 font-mono text-xs my-2">
-            let age = 20; <br/>
-            const name = "SmartCode";
-          </div>
+        </div>
 
-          <h4 className="text-white font-semibold mt-4">🎯 Yêu cầu bài tập:</h4>
-          <ul className="list-disc list-inside space-y-1">
-            <li>Khai báo biến <code>studentName</code> là tên của bạn.</li>
-            <li>Khai báo biến <code>score</code> là điểm số (số nguyên).</li>
-            <li>In ra màn hình: <code>"Sinh viên [Tên] đạt [Điểm] điểm"</code>.</li>
-          </ul>
+        <h3 className="text-lg font-bold text-white mt-6 mb-3">Cú pháp khai báo (ES6)</h3>
+        <ul className="list-none space-y-3 pl-0 mb-6">
+          <li className="flex items-start gap-3">
+             <code className="bg-gray-800 text-red-400 px-1.5 py-0.5 rounded font-mono text-xs border border-gray-700 mt-0.5">let</code>
+             <span className="text-gray-400 text-sm">Dùng cho biến có thể thay đổi giá trị (Ví dụ: Điểm số, Tuổi).</span>
+          </li>
+          <li className="flex items-start gap-3">
+             <code className="bg-gray-800 text-red-400 px-1.5 py-0.5 rounded font-mono text-xs border border-gray-700 mt-0.5">const</code>
+             <span className="text-gray-400 text-sm">Dùng cho hằng số không đổi (Ví dụ: Số PI, Tên miền web).</span>
+          </li>
+        </ul>
+
+        {/* Code Snippet - Style Tối */}
+        <div className="bg-[#0f172a] text-gray-300 p-4 rounded-lg font-mono text-xs mb-6 overflow-x-auto shadow-inner border border-gray-800">
+           <div className="text-gray-500 italic">// Khai báo biến tên là 'age'</div>
+           <div><span className="text-purple-400">let</span> <span className="text-yellow-400">age</span> = <span className="text-orange-400">25</span>;</div>
+           <br/>
+           <div className="text-gray-500 italic">// Khai báo hằng số PI</div>
+           <div><span className="text-purple-400">const</span> <span className="text-yellow-400">PI</span> = <span className="text-orange-400">3.14</span>;</div>
+        </div>
+        
+        <h3 className="text-lg font-bold text-white mt-6 mb-3">🎯 Nhiệm vụ của bạn:</h3>
+        <div className="bg-[#1e293b] border border-gray-700 rounded-xl p-5 shadow-sm">
+           <ul className="space-y-4 text-gray-300">
+             <li className="flex gap-3">
+                <span className="bg-gray-800 text-gray-400 w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold shrink-0 border border-gray-700">1</span>
+                <span className="text-sm">Khai báo biến <code className="text-red-400 bg-gray-900 px-1 rounded border border-gray-700">myName</code> chứa tên của bạn.</span>
+             </li>
+             <li className="flex gap-3">
+                <span className="bg-gray-800 text-gray-400 w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold shrink-0 border border-gray-700">2</span>
+                <span className="text-sm">Khai báo biến <code className="text-red-400 bg-gray-900 px-1 rounded border border-gray-700">score</code> giá trị là 100.</span>
+             </li>
+             <li className="flex gap-3">
+                <span className="bg-gray-800 text-gray-400 w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold shrink-0 border border-gray-700">3</span>
+                <span className="text-sm">Dùng lệnh <code>console.log()</code> để in chúng ra màn hình.</span>
+             </li>
+           </ul>
         </div>
       </div>
-
-      {/* Danh sách bài học (Footer Navigation) */}
-      <div className="border-t border-gray-800 bg-gray-900 p-2">
-         <p className="text-xs font-bold text-gray-500 uppercase px-2 mb-2">Lộ trình học tập</p>
-         <div className="space-y-1">
-            {lessons.map((lesson) => (
-              <div 
-                key={lesson.id} 
-                className={`flex items-center justify-between p-2 rounded cursor-pointer transition-colors ${
-                  lesson.status === 'active' ? 'bg-blue-900/30 border border-blue-800' : 'hover:bg-gray-800'
-                }`}
-              >
-                 <div className="flex items-center gap-2 overflow-hidden">
-                    {lesson.status === 'completed' && <CheckCircle size={14} className="text-green-500 shrink-0" />}
-                    {lesson.status === 'active' && <PlayCircle size={14} className="text-blue-400 shrink-0" />}
-                    {lesson.status === 'locked' && <Lock size={14} className="text-gray-600 shrink-0" />}
-                    
-                    <span className={`text-xs truncate ${lesson.status === 'active' ? 'text-white font-medium' : 'text-gray-400'}`}>
-                      {lesson.title}
-                    </span>
-                 </div>
-              </div>
-            ))}
-         </div>
+      
+      {/* Footer */}
+      <div className="mt-10 pt-6 border-t border-gray-800 text-center">
+         <button className="text-blue-400 font-bold text-sm hover:text-blue-300 hover:underline">Xem bài tiếp theo →</button>
       </div>
     </div>
   );
